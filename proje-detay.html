@@ -1,0 +1,961 @@
+<!doctype html>
+<html class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/css/output.css" rel="stylesheet">
+  <link href="assets/css/input.css" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+ <!-- Diğer head içeriği -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+
+</style>
+
+</head>
+<body x-data="{ open: false }" 
+      :class="{ 'modal-open': open }" 
+     >
+    <header class="border-b relative border-gray-950 lg:p-0 p-2">
+        <div class="container mx-auto">
+            <nav class="flex justify-between items-center">
+                <div class="logo">
+                    <a href="#">
+                        <img src="assets/images/logo.png" alt="logo" class="max-w-44">
+                    </a>
+                </div>
+                <div class="lg:h-20 h-auto lg:flex hidden  ">
+                    <ul class="flex items-center justify-center h-full gap-8 lg:flex-row flex-col">
+                        <li class="relative px-4 h-full flex items-center justify-center after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px] after:bg-[#442654] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">
+                            <a href="#" class="text-md font-medium">Anasayfa</a>
+                        </li>
+                        <li class="relative px-4 h-full flex items-center justify-center after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px] after:bg-[#442654] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">
+                            <a href="#" class="text-md font-medium">Kurumsal</a>
+                        </li>
+                        <li class="relative px-4 h-full flex items-center justify-center after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px] after:bg-[#442654] after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">
+                            <a href="#" class="text-md font-medium">Projeler</a>
+                        </li>
+                        <li class="relative px-4 h-full flex items-center justify-center after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px] after:bg-[#442654] after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left">
+                            <a href="#" class="text-md font-medium">İletişim</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Overlay -->
+                <div id="menuOverlay" class="lg:hidden fixed inset-0 bg-black/50 z-40 hidden"></div>
+
+                <!-- Mobil Menu -->
+                <div id="mobileMenu" class="lg:hidden fixed top-0 right-0 h-screen w-full max-w-[320px] bg-white shadow-lg transform transition-transform duration-300 translate-x-full z-50" style="z-index: 9999;">
+                    <div class="p-4">
+                        <a href="#">
+                            <img src="assets/images/logo.png" alt="logo" class="max-w-44">
+                        </a>
+                        <button class="absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#442654" fill="none"></svg>
+                        </button>
+                    </div>
+
+                    <div class="py-8 px-4 border-y border-gray-100">
+                        <div class="flex items-center gap-0">
+                            <input type="text"  placeholder="Aradığınızı Kelime..." class="outline-none border py-2 px-4 rounded-tl-md rounded-bl-md">
+                            <button type="submit" class="bg-[#442654] text-white py-2 px-4 rounded-tr-md rounded-br-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="24" color="#fff" fill="none">
+                                    <path d="M17.5 17.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4">
+                        <div class="space-y-4">
+                            <div class="border-b border-gray-100">
+                                <a href="#" class="block py-3 text-[15px] text-gray-900">Anasayfa</a>
+                            </div>
+                            <div class="border-b border-gray-100">
+                                <a href="#" class="block py-3 text-[15px] text-gray-900">Kurumsal</a>
+                            </div>
+                            <div class="border-b border-gray-100">
+                                <a href="#" class="block py-3 text-[15px] text-[#442654] font-medium">Projeler</a>
+                            </div>
+                            <div class="border-b border-gray-100">
+                                <a href="#" class="block py-3 text-[15px] text-gray-900">İletişim</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="items-center gap-4 h-full lg:flex hidden">
+                    <!-- Proje Arama -->
+                    <div class="relative">
+                        <div class="flex items-center gap-2">
+                            <label for="search" class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#442654" fill="none">
+                                    <path d="M17.5 17.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20C15.9706 20 20 15.9706 20 11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                </svg>
+                            </label>
+                            <input type="text" id="searchInput" placeholder="Aradığınızı Kelime..." class="outline-none border-b border-gray-200 p-2">
+                        </div>
+                        <div id="searchResults" class="absolute top-12 z-50 left-0 bg-white shadow-lg rounded-lg w-[320px]  p-4 hidden transition-all duration-300 origin-top scale-y-0 opacity-0">
+                            <div class="flex items-center gap-4  p-2 cursor-pointer border-b border-gray-200 last:border-b-0">
+                                <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
+                                    <img src="assets/images/proje-detay-1.png" alt="" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-sm font-medium text-gray-900">Proje Adı</span>
+                                </div>
+                            </div>
+                            <!-- Örnek sonuçlar -->
+                            <div class="flex items-center gap-4  p-2 border-b border-gray-200 last:border-b-0 cursor-pointer mt-2">
+                                <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
+                                    <img src="assets/images/proje-detay-2.png" alt="" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-sm font-medium text-gray-900">Başka Bir Proje</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4  p-2 border-b border-gray-200 last:border-b-0 cursor-pointer mt-2">
+                                <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
+                                    <img src="assets/images/proje-detay-3.png" alt="" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-sm font-medium text-gray-900">Üçüncü Proje</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proje Katalogları -->
+                    <div class="pl-8 relative border-l border-gray-200 h-20 xl:flex hidden items-center justify-center w-full">
+                        <div class="flex items-center gap-2 cursor-pointer" id="catalogTrigger">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#442654" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+                                <path d="M22 13.2644C21.0732 13.0906 20.12 13 19.1472 13C13.7948 13 9.03435 15.7425 6 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                <path d="M19 5C15.8705 8.66742 11.1679 11 5.90962 11C4.56437 11 3.25548 10.8473 2 10.5587" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                <path d="M14.6178 22C14.8684 20.786 15 19.5287 15 18.2407C15 11.9247 11.8343 6.34645 7 3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                            </svg>
+                            <span class="text-sm font-medium text-[#D7BB72]">PROJE KATALOGLARI</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#442654" fill="none">
+                                <path d="M18 9.00005C18 9.00005 13.5811 15 12 15C10.4188 15 6 9 6 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div id="catalogDropdown" class="absolute top-20 left-0 z-50 bg-white shadow-lg rounded-b-lg w-full p-4 hidden transition-all duration-300 origin-top scale-y-0 opacity-0"> 
+                            <div class="flex items-center gap-4 p-2 cursor-pointer border-b border-gray-200 hover:bg-gray-50 ">
+                                <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
+                                    <img src="assets/images/proje-detay-1.png" alt="" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-sm font-medium text-gray-900">Katalog 1</span>
+                                    <p class="text-sm text-gray-500">Katalog açıklaması burada yer alacak.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-2 cursor-pointer last:border-b-0 border-b border-gray-200 hover:bg-gray-50 mt-2">
+                                <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-100">
+                                    <img src="assets/images/proje-detay-2.png" alt="" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <span class="text-sm font-medium text-gray-900">Katalog 2</span>
+                                    <p class="text-sm text-gray-500">İkinci katalog için açıklama metni.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <label class="lg:hidden hamburger" id="hamburger">
+                    <input type="checkbox">
+                    <svg viewBox="0 0 32 32">
+                      <path class="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"></path>
+                      <path class="line" d="M7 16 27 16"></path>
+                    </svg>
+                  </label>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- Proje Top Title -->
+     <section class=" bg-[#F0F0F0] py-8">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="">
+                    <h1 class="text-xl md:text-2xl font-medium">HILL SIDE</h1>
+                </div>
+                <ul class="flex items-center gap-2 flex-wrap">
+                    <li>
+                        <a href="#">
+                            <span class="md:text-sm text-xs font-medium text-[#787878] hover:text-[#442654] transition-all duration-300">Projeler</span>
+                        </a>
+                    </li>
+                    <span class="md:text-sm text-xs text-[#787878] hover:text-[#442654] transition-all duration-300">/</span>
+                    <li>
+                        <a href="#">
+                            <span class="md:text-sm text-xs text-[#787878] hover:text-[#442654] transition-all duration-300">Devam Eden Projeler</span>
+                        </a>
+                    </li>
+                    <span class="md:text-sm text-xs text-[#787878] hover:text-[#442654] transition-all duration-300">/</span>
+                    <li>
+                        <a href="#">
+                            <span class="md:text-sm text-xs text-[#787878] hover:text-[#442654] transition-all duration-300">Hill Side</span>
+                        </a>
+                    </li>
+    
+                </ul>
+            </div>
+        </div>
+     </section>
+    <!-- Proje Top Title End -->
+
+    <!-- Proje Detay Navbar -->
+    <section class="bg-[#1D1D1B] lg:py-4">
+        <div class="container mx-auto lg:px-4 px-0">
+            <div class="grid lg:grid-cols-8 md:grid-cols-4 grid-cols-2 items-center lg:gap-8 gap-0  ">
+                <a href="#proje-hakkinda" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Proje Hakkında</a>
+                <a href="#proje-dis-render" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Proje Dış Renderları</a>
+                <a href="#proje-ic-render" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Proje İç Renderları</a>
+                <a href="#e-katalog" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">E-Katalog</a>
+                <a href="#sanal-tur" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Sanal Tur</a>
+                <a href="#kat-planlari" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Kat Planları</a>
+                <a href="#lokasyon" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Lokasyon</a>
+                <a href="#daha-fazla-detay" class="text-white text-sm font-medium xl:pr-8 pr-4 hover:text-[#D7BB72] transition-all duration-300 lg:border-none border-r border-gray-200 border-b lg:p-0 p-4 lg:text-start text-center">Daha Fazla Detay</a>
+            </div>
+        </div>
+    </section>
+    <!-- Proje Detay Navbar End -->
+
+    <!-- Proje Banner Detay -->
+    <section class="h-[500px] bg-cover bg-center relative" style="background-image: url(assets/images/banner-projects.png);">
+        <div class="absolute inset-0 md:bg-gradient-to-r md:from-[#FDEFDB] md:from-10% md:via-[#FDEFDB]/70 md:via-30% md:to-transparent md:to-50% bg-[#FDEFDB]/70 "></div>
+        <div class="container mx-auto h-full">
+            <div class="relative z-10 flex flex-col md:items-start items-center justify-center h-full ">
+                <div class="flex flex-col md:text-start text-center mb-4">
+                    <h3 class="md:text-6xl text-4xl font-normal text-[#593835] italic">Çok Fazla</h3>
+                    <h1 class="md:text-8xl text-6xl font-medium text-[#593835] italic">Mutluluk</h1>
+                    <h3 class="md:text-6xl text-4xl font-normal text-[#593835] italic">Kullandık</h3>
+                </div>
+                <p class="text-sm md:w-2/4 w-full text-center md:text-start text-[#593835]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+            </div>
+        </div>
+        <div class="absolute md:top-10 top-10 md:right-10 right-1/2 md:translate-x-0 translate-x-1/2 z-10">
+            <img src="assets/images/proje-detay-banner-logo.png" alt="" class="max-w-44 object-cover ">
+        </div>
+
+        
+        <div class="absolute right-0 md:bottom-36 bottom-10 rounded-tl-md rounded-bl-md z-10 hover:scale-105 transition-all duration-300 cursor-pointer  bg-[#A5872E] p-3" x-on:click="open = !open">
+            <div class="flex items-center gap-2 pr-8">
+                <div class="h-8 w-8">
+                    <img src="assets/images/talep-form-icon.png" alt="" class="w-full h-full object-cover ">
+                </div>
+                <div class="flex flex-col leading-none">
+                    <h3 class="text-white text-sm font-medium">Talep Formu</h3>
+                    <span class="text-black text-xs font-medium">Sizi Arayalım</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Proje Banner Detay End -->
+
+    <!-- Proje Hakkında -->
+    <section id="proje-hakkinda" class="pt-8 pb-16">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">PROJE HAKKINDA</h2>
+            <div class="flex justify-between lg:flex-row flex-col  mt-8">
+                <div class="lg:basis-1/2 basis-full flex flex-col md:gap-8 gap-4">
+                    <div class="">
+                        <img src="assets/images/miras-renk.png" alt="" class="lg:max-w-md max-w-60 object-cover ">
+                    </div>
+                    <div>
+                        <p class="md:text-md text-sm font-medium text-[#593835] lg:w-2/3 w-full">
+                            Çağdaş yaşam kültürünün klasik zerafet ile bütünleştiği Hillside, Gaziantep'e bir miras niteliğinde!
+                        </p>
+                    </div>
+                </div>
+                <div class="basis-1/2 lg:mt-0 mt-8">
+                    <div class="grid lg:grid-cols-2 md:grid-cols-3 grid-cols-2 gap-2  gap-y-10">
+
+                        <div class="flex md:items-center items-start justify-start md:gap-4 gap-2">
+                            <div>
+                                <img src="assets/images/anahtar-icon.png" alt="" class="md:max-w-10 max-w-8 object-cover ">
+                            </div>
+                            <div class="flex flex-col gap-1 ">
+                                <span class="md:text-lg text-sm font-bold text-black leading-[16px]">
+                                    HAZİRAN 2026
+                                </span>
+                                <span class="md:text-sm text-xs font-medium text-[#898989]">
+                                    '1. ETAP PROJE TESLİM TARİHİ
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex md:items-center items-start justify-start md:gap-4 gap-2">
+                            <div>
+                                <img src="assets/images/daire-alan-icon.png" alt="" class="md:max-w-10 max-w-8 object-cover ">
+                            </div>
+                            <div class="flex flex-col gap-1 ">
+                                <span class="md:text-lg text-sm font-bold text-black leading-[16px]">
+                                    130 m² - 285 m²
+                                </span>
+                                <span class="md:text-sm text-xs font-medium text-[#898989]">
+                                    DAİRE ALAN SEÇENEKLERİ
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex md:items-center items-start justify-start md:gap-4 gap-2">
+                            <div>
+                                <img src="assets/images/daire-sayisi-icon.png" alt="" class="md:max-w-12 max-w-8 object-cover ">
+                            </div>
+                            <div class="flex flex-col gap-1 ">
+                                <span class="md:text-lg text-sm font-bold text-black leading-[16px]">
+                                    8-12
+                                </span>
+                                <span class="md:text-sm text-xs font-medium text-[#898989]">
+                                    KATTAKİ DAİRE SAYISI
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex md:items-center items-start justify-start md:gap-4 gap-2">
+                            <div>
+                                <img src="assets/images/kat-sayisi-icon.png" alt="" class="md:max-w-10 max-w-8 object-cover ">
+                            </div>
+                            <div class="flex flex-col gap-1 ">
+                                <span class="md:text-lg text-sm font-bold text-black leading-[16px]">
+                                    6
+                                </span>
+                                <span class="md:text-sm text-xs font-medium text-[#898989]">
+                                    KAT SAYISI
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="flex md:items-center items-start justify-start md:gap-4 gap-2">
+                            <div>
+                                <img src="assets/images/daire-secenek-icon.png" alt="" class="md:max-w-10 max-w-7 object-cover ">
+                            </div>
+                            <div class="flex flex-col gap-1 ">
+                                <span class="md:text-lg text-sm font-bold text-black leading-[16px]">
+                                    5,5+1   /    5+1
+                                </span>
+                                <span class="md:text-sm text-xs font-medium text-[#898989]">
+                                    DAİRE SEÇENEKLERİ
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="flex md:items-center items-start justify-start md:gap-4 gap-2">
+                            <div>
+                                <img src="assets/images/ticari-icon.png" alt="" class="md:max-w-10 max-w-7 object-cover ">
+                            </div>
+                            <div class="flex flex-col gap-1 ">
+                                <span class="md:text-lg text-sm font-bold text-black leading-[16px]">
+                                    Bulunmuyor
+                                </span>
+                                <span class="md:text-sm text-xs font-medium text-[#898989]">
+                                    TİCARİ ÜNİTELER
+                                </span>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Proje Hakkında End -->
+
+    <!-- Proje Dış Renderları -->
+     <section id="proje-dis-render" class="py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">DIŞ RENDERLAR</h2>
+           <div class="grid lg:grid-cols-4 grid-cols-2 gap-2 py-10">
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 gallery-item">
+                    <a data-fancybox="gallery" data-src="assets/images/proje-detay-1.png">
+                        <img src="assets/images/proje-detay-1.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 gallery-item">
+                    <a data-fancybox="gallery" data-src="assets/images/proje-detay-2.png">
+                        <img src="assets/images/proje-detay-2.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 gallery-item">
+                    <a data-fancybox="gallery" data-src="assets/images/proje-detay-3.png">
+                        <img src="assets/images/proje-detay-3.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 gallery-item">
+                    <a data-fancybox="gallery" data-src="assets/images/proje-detay-4.png">
+                        <img src="assets/images/proje-detay-4.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 gallery-item">
+                    <a data-fancybox="gallery" data-src="assets/images/proje-detay-5.png">
+                        <img src="assets/images/proje-detay-5.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+           </div>
+        </div>
+     </section>
+     <!-- Proje Dış Renderları End -->
+
+
+
+    <!-- Proje İç Renderları -->
+    <section id="proje-ic-render" class="py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">İÇ RENDERLAR</h2>
+            <div class="grid lg:grid-cols-4 grid-cols-2 gap-2 py-10">
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 ic-render-item">
+                    <a data-fancybox="gallery" data-src="assets/images/ic-render-1.png">
+                        <img src="assets/images/ic-render-1.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 ic-render-item">
+                    <a data-fancybox="gallery" data-src="assets/images/ic-render-2.png">
+                        <img src="assets/images/ic-render-2.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 ic-render-item">
+                    <a data-fancybox="gallery" data-src="assets/images/ic-render-3.png">
+                        <img src="assets/images/ic-render-3.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+                <div class="w-full md:h-64 h-32 overflow-hidden opacity-0 ic-render-item">
+                    <a data-fancybox="gallery" data-src="assets/images/ic-render-4.png">
+                        <img src="assets/images/ic-render-4.png" alt="" class="w-full h-full object-cover hover:scale-105 transition-all duration-300 cursor-pointer">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Proje İç Renderları End -->
+
+
+    <!-- Proje E-Katalog -->
+    <section id="e-katalog" class="eKatalog py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black pb-10">E-KATALOG</h2>
+        </div>
+        <div class="bg-black py-14 md:py-24">
+            <div class="container mx-auto">
+                <div class="flex items-start justify-between ">
+                    <div class="basis-1/3 md:block hidden">
+                        <img src="assets/images/e-katalog.png" alt="" class="lg:max-w-[600px] max-w-full object-cover ">
+                    </div>
+                    <div class="md:basis-2/3 basis-full flex flex-col justify-center items-center">
+                        <div class="md:min-h-[350px] min-h-[250px] flex flex-col justify-between">
+                            <div class="md:block flex items-center flex-col justify-center gap-2">
+                                <div>
+                                    <img src="assets/images/proje-detay-banner-logo.png" alt="" class="md:max-w-96  max-w-44 object-cover ">
+                                </div>
+                                <div class="mt-4">
+                                    <h3 class="text-white md:text-lg text-sm font-medium md:w-3/4 w-full md:text-start text-center">
+                                        Projemizin e-kataloğunu indirebilir, paylaşabilirsiniz.
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="flex md:justify-start justify-center gap-2">
+                                <a href="#" class="border border-[#A5872E] text-[#858585] hover:bg-[#A5872E] hover:text-white transition-all duration-300 md:px-6 md:py-[10px] px-4 py-2 rounded-sm flex items-center justify-center gap-1 font-medium">
+                                    Kataloğa Göz At
+                                </a>
+                                <a href="#" 
+                                   x-data="{ 
+                                     copyUrl() {
+                                       navigator.clipboard.writeText(window.location.href)
+                                         .then(() => {
+                                           this.$el.textContent = 'Kopyalandı!';
+                                           setTimeout(() => {
+                                             this.$el.textContent = 'Kataloğu Paylaş';
+                                           }, 2000);
+                                         })
+                                         .catch(() => {
+                                           this.$el.textContent = 'Kopyalama Başarısız!';
+                                           setTimeout(() => {
+                                             this.$el.textContent = 'Kataloğu Paylaş';
+                                           }, 2000);
+                                         });
+                                     }
+                                   }" 
+                                   @click.prevent="copyUrl()"
+                                   class="bg-[#A5872E] hover:bg-transparent border border-[#A5872E] hover:text-[#858585] md:px-6 md:py-[10px] px-4 py-2 rounded-sm flex items-center justify-center gap-1 hover:bg-[#8e7328] transition-colors duration-300 font-medium text-white">
+                                    Kataloğu Paylaş
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Proje İç Renderları End -->
+
+    <!-- Proje Peyzaj -->
+    <section id="peyzaj" class="peyzaj py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">PEYZAJ</h2>
+        </div>
+        <div class="flex flex-col mt-8">
+            <div class="w-full md:h-[500px] h-[300px]">
+                <img src="assets/images/peyzaj-image.png" alt="Peyzaj Resim" class="w-full h-full object-cover" /> 
+            </div>
+            <div class="lg:flex flex-row flex-wrap grid md:grid-cols-6 grid-cols-3">
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/basketbol-sahasi.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Basketbol Sahaları</span>
+                </div>
+                <!-- İtem 2 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/kamera-icon.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">7/24 Güvenlik</span>
+                </div>
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/yüzme-yavuzu-icon.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Yüzme Havuzu</span>
+                </div>
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/yuruyus-icon.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Yürüyüş Yolları</span>
+                </div>
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/oyun-parki-icon.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Çocuk Oyun Alanı</span>
+                </div>
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/sus-havuzlari-icon.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Süs Havuzları</span>
+                </div>
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/kamelya-icon.png" alt="" class="max-w-10 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Kamelyalar</span>
+                </div>
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/spa-icon.png" alt="" class="max-w-12 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">SPA</span>
+                </div>
+
+
+                <!-- İtem 1 -->
+                <div class="flex flex-col items-center justify-around md:px-6 px-4 md:py-6 py-4 even:bg-[#856E2C] odd:bg-[#A5872E] md:min-h-56 min-h-48 flex-1 ">
+                    <div>
+                        <img src="assets/images/hamam-icon.png" alt="" class="max-w-12 object-cover">
+                    </div>
+                    <span class="md:text-base text-sm font-medium text-white text-center  min-h-[40px] flex items-start">Türk Hamamı</span>
+                </div>
+                 
+
+            </div>
+        </div>
+    </section>
+    <!-- Proje Peyzaj End -->
+
+    <!-- Proje Lokasyon -->
+    <section id="lokasyon" class="lokasyon py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">LOKASYON</h2>
+                <div class="w-full md:h-[400px] h-[300px] rounded-lg overflow-hidden mt-10">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3183.4091206030766!2d37.3595563!3d37.071561700000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1531e144edd0f1bf%3A0xe35d4a7dc82a6b4c!2sMiova%20Reklam%20Ajans%C4%B1!5e0!3m2!1str!2str!4v1737032369868!5m2!1str!2str"
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="w-full h-full">
+                    </iframe>
+                </div>
+        </div>
+    </section>
+    <!-- Proje Lokasyon End -->
+
+    <!-- Kusursuz Kalite -->
+    <section id="kusursuz-kalite" class="kusursuz-kalite py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">KUSURSUZ KALİTE</h2>
+        </div>
+        <div class="w-full md:max-h-[750px] max-h-[300px] overflow-hidden py-10">
+            <img src="assets/images//kusursuz-kalite.png" alt="" class="w-full h-full object-cover">
+        </div>
+    </section>
+    <!-- Proje Kusursuz End -->
+
+
+    <!-- Kat Planları  -->
+    <section id="kat-planlari" class="kat-planlari py-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">KAT PLANLARI</h2>
+            <div class="swiper katPlanlar mt-8">
+                <div class="swiper-wrapper ">
+                  <div class="swiper-slide ">
+                    <img src="assets/images/katplanlari.png" alt="" class="w-full h-full object-cover">
+                  </div>
+                  <div class="swiper-slide ">
+                    <img src="assets/images/katplanlari.png" alt="" class="w-full h-full object-cover">
+                  </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
+
+        </div>
+    </section>
+    <!-- Kat Planları End -->
+
+
+    <!-- Daha Fazla  -->
+    <section id="daha-fazla-detay" class="daha-fazla-detay pt-8 border-t border-[#442654]">
+        <div class="container mx-auto">
+            <h2 class="md:text-xl text-lg font-medium text-black">DAHA FAZLA</h2>
+            <div class="swiper dahaFazla">
+                <div class="swiper-wrapper ">
+
+                  <div class="swiper-slide md:min-h-[450px] min-h-[300px] ">
+                    <div class="flex flex-row items-center ">
+                        <div class="lg:basis-1/3 md:min-h-[450px] min-h-[300px] flex flex-col lg:items-start items-center justify-center pb-10">
+                            <div class="flex flex-col lg:items-start items-center  lg:justify-start justify-center mb-10">
+                                <h2 class="lg:text-8xl  md:text-5xl text-4xl font-bold text-black">
+                                    FITNESS
+                                </h2>
+                                <h5 class="md:text-2xl text-xl font-normal text-black">SAĞLIKLI YAŞAM YANI BAŞINIZDA</h5>
+                            </div>
+                            <p class="text-md font-normal text-black text-center lg:text-start md:text-base text-sm">
+                                Spor yapmak için ihtiyacınız olan fitness a ulaşmak sadece bir kaç dakika. Açık havada harika peyzaj alanları ve süs havuzlarının arasında yürüyüş yapmakda sizin için harika bir alternatif olabilir.
+                            </p>
+                        </div>
+                        <div class="h-[550px] basis-2/3 lg:block hidden">
+                            <img src="assets/images/fitness.png" alt="FITNESS" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide md:min-h-[450px] min-h-[300px] ">
+                    <div class="flex flex-row items-center ">
+                        <div class="lg:basis-1/3 md:min-h-[450px] min-h-[300px] flex flex-col lg:items-start items-center justify-center pb-10">
+                            <div class="flex flex-col items-start justify-start mb-10">
+                                <h2 class="lg:text-8xl text-4xl font-bold text-black">
+                                    FITNESS
+                                </h2>
+                                <h5 class="text-2xl font-normal text-black">SAĞLIKLI YAŞAM YANI BAŞINIZDA</h5>
+                            </div>
+                            <p class="text-base font-normal text-black text-center lg:text-start">
+                                Spor yapmak için ihtiyacınız olan fitness a ulaşmak sadece bir kaç dakika. Açık havada harika peyzaj alanları ve süs havuzlarının arasında yürüyüş yapmakda sizin için harika bir alternatif olabilir.
+                            </p>
+                        </div>
+                        <div class="h-[550px] basis-2/3 lg:block hidden">
+                            <img src="assets/images/fitness.png" alt="FITNESS" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                  </div>
+                
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+
+        </div>
+    </section>
+    <!-- Kat Planları End -->
+
+    <!-- Proje Detay İletişim -->
+    <section class="py-8 gradient-section lg:px-24 md:px-12 px-4">
+        <div class="flex md:justify-between justify-center items-center lg:flex-nowrap flex-wrap">
+            <div class="2xl:basis-1/12">
+                <img src="assets/images/proje-detay-banner-logo.png" alt="" class="max-w-52">
+            </div>
+            <div class="flex flex-col 2xl:basis-1/4 px-4 md:my-0 my-4 md:text-start text-center">
+                <h4 class="text-white text-2xl font-medium">
+                    Sizi Arayıp Bilgilendirelim.
+                </h4>
+                <p class="text-white text-sm font-normal">
+                    Sevin Yapı dünyasındaki yeniliklerden ilk siz haberdar  olmak için bültenimize katılın.
+                </p>
+            </div>
+            <div class="flex flex-col 2xl:basis-2/4 px-4 mt-4 lg:mt-0">
+                <form class="flex flex-col gap-4">
+                    <div class="grid 2xl:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-2">
+                        <input type="text" placeholder="adınız, soyadınız" class="bg-transparent border border-white text-white placeholder:text-white px-4 py-2 outline-none">
+        
+                        <input type="tel" placeholder="+90 123 456 78 90" class="bg-transparent border border-white text-white placeholder:text-white px-4 py-2 outline-none">
+                        
+                        <input type="email" placeholder="e-posta adresiniz" class="bg-transparent border border-white text-white placeholder:text-white px-4 py-2 outline-none">
+                        
+                        <button type="submit" class="bg-[#FFC300] border-2 border-white font-medium text-white px-8 py-2 2xl:ml-4 ml-0 hover:bg-[#FFC300]/80 transition-colors duration-300">
+                            KAYDOL
+                        </button>
+                    </div>                    
+                    
+                    <div class="flex items-center gap-2 text-white/70 text-sm">
+                        <div class="relative flex items-center">
+                            <input type="checkbox" id="kvkk_proje_detay_form" class="appearance-none w-4 h-4 border border-white cursor-pointer checked:bg-white transition-colors duration-200">
+                        </div>
+                        <label for="kvkk_proje_detay_form" class="cursor-pointer md:text-sm text-xs">
+                            Kampanyalardan haberdar olmak için tarafıma elektronik ileti gönderilmesini kabul ederim. 
+                            <a href="#" class="text-[#FFC300] underline">KVKK aydınlatma metnini</a> okudum.
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#F2F2F2]">
+        <div class="flex items-stretch min-h-[400px] md:flex-row flex-col">
+            <!-- Sol Kısım -->
+            <div class="md:basis-1/3 basis-full bg-[#E7E7E7] py-10 md:px-14 px-8">
+                <div class="flex flex-col">
+                    <img src="assets/images/logo.png" alt="" class="max-w-52">
+                    <div class="flex gap-4 mt-8">
+                        <a href="#" class="text-sm font-medium text-[#011B56] hover:text-[#A5872E] hover:-translate-y-2 transition-all duration-300">
+                            <i class="fa-brands fa-x-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="font-medium text-[#011B56] hover:text-[#A5872E] hover:-translate-y-2 transition-all duration-300">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-sm font-medium text-[#011B56] hover:text-[#A5872E] hover:-translate-y-2 transition-all duration-300">
+                            <i class="fa-brands fa-facebook text-xl"></i>
+                        </a>
+                    </div>
+                    <div class="mt-8">
+                        <a href="tel:+903422310231" class="font-bold lg:text-2xl text-xl text-[#011B56] hover:text-[#A5872E] transition-all duration-300">
+                            +90 342 231 02 31
+                        </a>
+                    </div>
+                    <div class="mt-8">
+                        <a href="" class="flex gap-2 items-center">
+                            <div>
+                                <img src="assets/images/right.png" alt="">
+                            </div>
+                            <span class="text-sm font-medium text-[#011B56] hover:text-[#A5872E] transition-all duration-300">
+                                Haritada Göster
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>    
+            <!-- Sağ Kısım -->
+            <div class="md:basis-2/3 basis-full">
+                <div class="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-1 md:gap-2 gap-8 py-10 px-8 2xl:px-24">
+                    <!-- Kurumsal -->
+                    <div class="md:space-y-4 space-y-2">
+                        <h3 class="text-[#A49BA4] font-medium">Kurumsal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">Firma Profili</a></li>
+                            <li><a href="#" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">Hakkımızda</a></li>
+                            <li><a href="#" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">Sosyal Sorumluluk</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Projeler -->
+                    <div class="md:space-y-4 space-y-2">
+                        <h3 class="text-[#A49BA4] font-medium">Projeler</h3>
+                        <ul class="md:space-y-2 space-y-1">
+                            <li><a href="#" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">Devam Eden Projeler</a></li>
+                            <li><a href="#" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">Tamamlanan Projeler</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Devam Eden Projeler -->
+                    <div class="md:space-y-4 space-y-2">
+                        <h3 class="text-[#A49BA4] font-medium">Devam Eden Projeler</h3>
+                        <ul class="md:space-y-2 space-y-1">
+                            <li><a href="#" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">Hill Side</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Bize Ulaşın -->
+                    <div class="md:space-y-4 space-y-2">
+                        <h3 class="text-[#A49BA4] font-medium">Bize Ulaşın</h3>
+                        <ul class="space-y-2">
+                            <li><span class="text-md text-[#A49BA4]">Bültenimize katılın!</span></li>
+                            <li class="flex items-center gap-2 bg-white p-2">
+                                <input type="email" 
+                                       placeholder="E-Posta Adresiniz" 
+                                       class="text-sm text-gray-600 pl-2 bg-transparent focus:outline-none focus:border-[#A5872E] transition-colors duration-300 py-1 w-full">
+                                <button class="bg-black p-2 rounded-full hover:bg-[#A5872E] transition-colors duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </li>
+                            <li><p class="text-sm text-[#A49BA4] mt-6">İbrahimli Mh. Naci Topcuoğlu Cd. No:34/C Şehitkamil/GAZİANTEP</p></li>
+                            <li><a href="tel:+903422310231" class="text-sm text-[#A49BA4] hover:text-[#A5872E] transition-colors duration-300">+90 342 231 0 231</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <div class="bg-[#C6C6C6] py-2 px-8 flex items-center justify-between md:flex-row flex-col gap-2">
+            <p class="md:text-sm text-xs text-[#838383]">Tüm hakları saklıdır. Sevin Yapı 2025</p>
+            <div class="flex items-center gap-2">
+                <p class="md:text-sm text-xs text-[#838383]">Tasarım ve Kodlama: Teknografi Yaratıcı İşler Atölyesi</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+    
+    <div class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 z-50 w-full h-full overflow-y-auto" 
+         x-show="open" 
+         x-cloak 
+         @scroll.prevent
+         x-transition.duration.300ms
+         @click.away.prevent="open = false"
+         style="z-index: 99999;">
+        <div class="flex items-center justify-center gap-2 w-full h-full lg:px-0 px-4 ">
+            <div class="bg-[#080600] rounded-md max-w-[850px] min-h-[500px] md:p-14 p-7 relative">
+                <div class="absolute top-4 right-4 cursor-pointer border-2 border-white rounded-md p-1 hover:bg-white group transition-all duration-300" x-on:click="open = !open">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" color="#ffffff" fill="none" class="group-hover:text-[#080600] transition-all duration-300">
+                        <path d="M19.0005 4.99988L5.00049 18.9999M5.00049 4.99988L19.0005 18.9999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="flex md:gap-16 gap-4  md:flex-row flex-col">
+                    <div class="flex flex-col md:basis-1/2">
+                        <div class="">
+                            <img src="assets/images/proje-detay-banner-logo.png" alt="" class="md:max-w-44 max-w-32 object-cover ">
+                        </div>
+                        <div class="flex flex-col md:my-8 my-4">
+                            <img src="assets/images/miras.png" alt="" class="md:max-w-52 max-w-40 object-cover ">
+                        </div>
+                        <div class="flex flex-col">
+                            <p class="text-white md:text-sm text-xs font-medium ">
+                                Çağdaş yaşam kültürünün klasik zerafet ile bütünleştiği Hillside, Gaziantep'e bir miras niteliğinde!
+                            </p>
+                        </div>
+                        <div class="flex flex-col mt-6">
+                            <p class="text-[#A5872E] md:text-sm text-xs font-medium">
+                                Sizde bu projede yerinizi almak için sizi arayarak merak ettiklerinizi cevaplamamız için sağ taraftaki formu doldurunuz.
+                            </p>
+                        </div>
+                    </div>
+                    <form action="" class="form md:basis-1/2">
+                        <div class="space-y-4">
+                            <div class="relative">
+                                <input type="text" 
+                                       class="w-full bg-transparent border-b border-white py-2 text-white text-sm focus:outline-none focus:border-white placeholder-white pl-2 "
+                                       placeholder="Adınız">
+                            </div>
+
+                            <div class="relative">
+                                <input type="tel" 
+                                       class="w-full bg-transparent border-b border-white py-2 text-white text-sm focus:outline-none focus:border-white placeholder-white pl-2 "
+                                       placeholder="Telefon">
+                            </div>
+
+                            <div class="relative">
+                                <input type="email" 
+                                       class="w-full bg-transparent border-b border-white py-2 text-white text-sm focus:outline-none focus:border-white placeholder-white pl-2 "
+                                       placeholder="E-Posta Adresiniz">
+                            </div>
+
+                            <div class="pt-4 md:pb-10 pb-4 flex flex-col gap-2">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" class="hidden peer">
+                                    <div class="w-4 h-4 border border-white p-[2px] relative">
+                                        <div class="w-full h-full [.peer:checked~*>&]:bg-white transition-colors duration-200"></div>
+                                    </div>
+                                    <span class="text-xs text-white flex-1"><a href="#" class="underline">KVKK Aydınlatma metinini </a> okudum.</span>
+                                </label>
+                                
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" class="hidden peer">
+                                    <div class="w-4 h-4 border  border-white p-[2px] relative">
+                                        <div class="w-full h-full [.peer:checked~*>&]:bg-white transition-colors duration-200"></div>
+                                    </div>
+                                    <span class="text-xs text-white flex-1">Markamız ile ilgili gelişmelerden haberdar olmak için
+                                        tarafıma elektronik ileti gönderilmesini kabul ederim.</span>
+                                </label>
+                            </div>
+                            <!-- Gönder Butonu -->
+                            <button class="w-full bg-transparent border border-white text-white py-2 text-sm font-medium hover:bg-white hover:text-[#080600]  transition-colors duration-300">
+                                GÖNDER
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Proje Katalogları Mobile-->
+    <div class="fixed md:bottom-4 bottom-12 right-4 z-50 xl:hidden inline-flex items-center  justify-between">
+        <a href="#" class="bg-[#D7BB72] px-6 py-[10px] rounded-sm flex items-center justify-center gap-1">
+            <div class="inline-flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#442654" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M22 13.2644C21.0732 13.0906 20.12 13 19.1472 13C13.7948 13 9.03435 15.7425 6 20" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                    <path d="M19 5C15.8705 8.66742 11.1679 11 5.90962 11C4.56437 11 3.25548 10.8473 2 10.5587" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                    <path d="M14.6178 22C14.8684 20.786 15 19.5287 15 18.2407C15 11.9247 11.8343 6.34645 7 3" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                </svg>
+                <span class="text-sm font-medium text-white">PROJE KATALOGLARI</span>
+            </div>
+        </a>
+    </div>
+
+    <!-- Proje Katalogları Mobile End-->
+
+    <script src="assets/js/gsap.js"></script>
+    <script src="assets/js/slider.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    <script type="module">import { Fancybox } from "https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.esm.js";</script>
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+
+</body>
+</html>
+
