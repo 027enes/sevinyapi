@@ -1001,6 +1001,10 @@ video {
   scroll-behavior: smooth;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -2244,6 +2248,10 @@ body.no-scroll {
     padding: 0px;
   }
 
+  .lg\:p-4 {
+    padding: 1rem;
+  }
+
   .lg\:px-0 {
     padding-left: 0px;
     padding-right: 0px;
@@ -2262,6 +2270,10 @@ body.no-scroll {
   .lg\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .lg\:text-center {
+    text-align: center;
   }
 
   .lg\:text-start {
