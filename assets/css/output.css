@@ -1939,6 +1939,10 @@ body.no-scroll {
     margin-bottom: 2rem;
   }
 
+  .md\:mt-0 {
+    margin-top: 0px;
+  }
+
   .md\:block {
     display: block;
   }
