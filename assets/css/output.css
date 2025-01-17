@@ -2322,6 +2322,10 @@ body.no-scroll {
     padding-left: 6rem;
     padding-right: 6rem;
   }
+
+  .\32xl\:pr-8 {
+    padding-right: 2rem;
+  }
 }
 
 .peer:checked~*>.\[\.peer\:checked\~\*\>\&\]\:bg-white {
