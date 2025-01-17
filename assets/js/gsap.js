@@ -74,7 +74,7 @@ sections.forEach(section => {
         duration: 0.7,
         scrollTrigger: {
             trigger: section,
-            start: "top bottom-=500",
+            start: "top bottom-=200",
             once: true,
            
         }
