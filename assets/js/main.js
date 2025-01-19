@@ -29,15 +29,20 @@ addEventListener('DOMContentLoaded', () => {
 
     const catalogTrigger = document.getElementById('catalogTrigger');
     const catalogDropdown = document.getElementById('catalogDropdown');
+    const catalogDropdownIcon = document.getElementById('catalogDropdownIcon');
 
     catalogTrigger.addEventListener('click', function() {
         if (catalogDropdown.classList.contains('hidden')) {
             catalogDropdown.classList.remove('hidden');
             requestAnimationFrame(() => {
                 catalogDropdown.classList.remove('scale-y-0', 'opacity-0');
+                catalogDropdownIcon.classList.add('rotate-180');
+
             });
         } else {
             catalogDropdown.classList.add('scale-y-0', 'opacity-0');
+            catalogDropdownIcon.classList.remove('rotate-180');
+
             setTimeout(() => {
                 catalogDropdown.classList.add('hidden');
             }, 300);
